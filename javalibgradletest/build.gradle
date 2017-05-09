@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+
+task hello{
+    println 'hello'
+}
+
+task test_UP_TO_DATE_feature{
+    def sources = fileTree('fileSrc')
+    def destination = file('fileDest/res.txt')
+
+    inputs.dir sources
+    outputs.file destination
+
+    doLast {
+        destination.withPrintWriter { writer ->
+            sources.each {source ->
+                writer.println source.text
+            }
+        }
+    }
+}
