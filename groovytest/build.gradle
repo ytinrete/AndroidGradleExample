@@ -1,0 +1,38 @@
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+version = '1.0'
+group = 'testOne'
+archivesBaseName = 'hellotask'
+
+repositories.mavenCentral()
+
+println 'lalalalal'
+println project.rootDir.path
+println 'lalalalal'
+
+
+
+dependencies {
+
+    compile gradleApi()
+    compile localGroovy()
+}
+uploadArchives {
+    repositories.mavenDeployer {
+
+        def outpath =project.rootDir.path+'/libs'
+
+        println outpath
+
+//        pom.groupId = group
+//        pom.artifactId = archivesBaseName
+//        pom.version = version
+//                repository(url: RELEASE_NTESPM_REPOSITORY_URL) {
+//                    authentication(userName: "admin", password: "admin123")
+//                }
+//        repository(url: uri('./repo'))
+
+        repository(url: "file:${outpath}")
+    }
+}

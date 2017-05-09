@@ -28,3 +28,21 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
+
+task appTask1{
+    doLast{
+        println 'appTask1'
+    }
+
+}
+
+task appTask2{
+    doLast{
+        println 'appTask2'
+    }
+}
+
+appTask1.dependsOn appTask2
+
+appTask1.dependsOn ':javalibgradletest:javaTask2'
+appTask2.dependsOn ':javalibgradletest:javaTask1'

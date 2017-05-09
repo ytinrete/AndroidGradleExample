@@ -1,4 +1,24 @@
+
 apply plugin: 'java'
+
+
+sourceSets {
+
+    println 'main'
+
+    main {
+
+        java {
+            srcDir 'src/main/javasrc'
+        }
+
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -8,11 +28,17 @@ sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
 
-task hello{
-    println 'hello'
+task hello {
+    doLast() {
+        println 'hello'
+    }
+
 }
 
-task test_UP_TO_DATE_feature{
+
+
+
+task test_UP_TO_DATE_feature {
     def sources = fileTree('fileSrc')
     def destination = file('fileDest/res.txt')
 
@@ -21,9 +47,52 @@ task test_UP_TO_DATE_feature{
 
     doLast {
         destination.withPrintWriter { writer ->
-            sources.each {source ->
+            sources.each { source ->
                 writer.println source.text
             }
         }
     }
 }
+
+task javaTask1 {
+    doLast {
+        println 'javaTask1'
+    }
+}
+
+task javaTask2 {
+    doLast {
+        println 'javaTask2'
+    }
+}
+
+//javaTask1.dependsOn javaTask2
+
+
+buildscript {
+    repositories {
+        maven {
+            def outpath =project.rootDir.path+'/libs'
+            url "file:${outpath}"
+        }
+
+    }
+
+    dependencies {
+//        classpath project(':groovytest')
+        classpath group: 'testOne', name: 'hellotask', version: '1.0'
+    }
+}
+
+import testgradle.HelloWorldTask
+
+
+task myhello(type:HelloWorldTask)
+
+task myhello1(type:HelloWorldTask){
+    message ="lalala"
+}
+
+
+
+

@@ -1,1 +1,1 @@
-include ':app', ':javalibgradletest'
+include ':app', ':javalibgradletest', ':groovytest'

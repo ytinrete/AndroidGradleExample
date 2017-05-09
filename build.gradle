@@ -12,12 +12,49 @@ buildscript {
     }
 }
 
+subprojects {
+
+    task allTask2 {
+        doLast {
+            println '--------'
+            println project.name
+        }
+
+    }
+
+}
+
 allprojects {
     repositories {
         jcenter()
+    }
+
+    apply plugin: 'idea'
+
+
+    task allTask {
+        doLast {
+            println project.name
+        }
+
+    }
+}
+
+configure(allprojects.findAll { it.name.startsWith('java') }) {
+    allTask2  {
+        doLast{
+            println 'this is a sub project'
+        }
+
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+project(':javalibgradletest') {
+    task forProject1  {
+        println 'for project 1'
+    }
 }
