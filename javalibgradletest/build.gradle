@@ -1,4 +1,3 @@
-
 apply plugin: 'java'
 
 
@@ -72,7 +71,7 @@ task javaTask2 {
 buildscript {
     repositories {
         maven {
-            def outpath =project.rootDir.path+'/libs'
+            def outpath = project.rootDir.path + '/libs'
             url "file:${outpath}"
         }
 
@@ -80,17 +79,22 @@ buildscript {
 
     dependencies {
 //        classpath project(':groovytest')
-        classpath group: 'testOne', name: 'hellotask', version: '1.0'
+//        classpath 'testgradle:plugingradletestlalala123:2.0'
+
+        classpath 'testOne:hellotask:2.0'
+
+//        classpath group: 'testOne', name: 'hellotask', version: '2.0'
     }
 }
 
-import testgradle.HelloWorldTask
+apply plugin:'lalala123456'
 
+import testgradle.task.HelloWorldTask
 
-task myhello(type:HelloWorldTask)
+task myhello(type: HelloWorldTask)
 
-task myhello1(type:HelloWorldTask){
-    message ="lalala"
+task myhello1(type: HelloWorldTask) {
+    message = "lalala"
 }
 
 

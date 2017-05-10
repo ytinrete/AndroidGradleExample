@@ -1,4 +1,4 @@
-package testgradle
+package testgradle.task
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Optional
